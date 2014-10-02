@@ -15,7 +15,7 @@ struct HasToStringFunction
  
     enum
     {
-        Result = sizeof(Tester<ClassType>(NULL)) == sizeof(Yes)
+        Result = sizeof(Tester<ClassType>(nullptr)) == sizeof(Yes)
     };
 };
  
