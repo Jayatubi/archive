@@ -18,6 +18,24 @@ struct HasToStringFunction
         Result = sizeof(Tester<ClassType>(nullptr)) == sizeof(Yes)
     };
 };
+
+template<typename ClassType>
+struct HasSuper
+{
+    typedef struct { char[2]; } Yes;
+    typedef struct { char[1]; } No;
+     
+    template<typename FooType>
+    struct FuncMatcher;
  
-bool a_has_tostring = HasToStringFunction<A>::Result;   // True
-bool b_has_tostring = HasToStringFunction<B>::Result;   // False
+    template<typename FooType>
+    static Yes Tester(FuncMatcher<typename FooType::Super>*);
+ 
+    template<typename FooType>
+    static No Tester(...);
+ 
+    enum
+    {
+        Result = sizeof(Tester<ClassType>(nullptr)) == sizeof(Yes)
+    };
+};
